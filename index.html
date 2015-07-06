@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>Todo App</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+
+		<script src="app.js"></script>
+
+		<style>
+		.done{text-decoration: line-through; color:#d1d1d1;}
+		 body {background-color: #f0ffff;}
+		 input {padding: 4.5px;}
+		</style>
+	</head>
+
+	<body ng-app="todoApp" ng-controller="MainController">
+
+		<div class="col-md-6 col-md-offset-4">
+			<div class="page-header">
+        		<h1>To-Do App</h1>
+      		</div>
+			<div>
+				<form ng-submit="add()">
+					<input type="text" name="newlist" ng-model="newlist" placeholder="What are you up to?"/>
+					<button class="btn btn-success">Add Task</button>
+				</form>
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="todo in todos">
+						<input type="checkbox" ng-model="todo.done"/>
+						<span ng-class="{done: todo.done}">{{todo.title}}</span>
+					</li>
+				</ul>
+				<button ng-click="clear()" class="btn btn-warning">Clear</button>
+			</div>
+		</div>
+
+	</body>
+</html>
+
