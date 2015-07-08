@@ -1,41 +1,55 @@
-<html>
+<!DOCTYPE html>
+<html ng-app="todoApp" >
 	<head>
-		<title>Todo App</title>
+		<title>To-Do App</title>
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
-		<script src="app.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
 
-		<style>
-		.done{text-decoration: line-through; color:#d1d1d1;}
-		 body {background-color: #f0ffff;}
-		 input {padding: 4.5px;}
-		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.js"></script>
+
+		<script src="assets/js/app.js"></script>
+
+		<script src="assets/js/controllers/MainController.js"></script>
+
 	</head>
 
-	<body ng-app="todoApp" ng-controller="MainController">
+	<body ng-controller="MainController">
 
-		<div class="col-md-6 col-md-offset-4">
-			<div class="page-header">
-        		<h1>To-Do App</h1>
-      		</div>
+		<div class="page-header">
+			<br/>
+	        <h1>To-Do App</h1>
+      	</div>
+
+		<div class="col-md-4 col-md-offset-4">
+			<br/>
+			<br/>
 			<div>
 				<form ng-submit="add()">
-					<input type="text" name="newlist" ng-model="newlist" placeholder="What are you up to?"/>
-					<button class="btn btn-success">Add Task</button>
+					<input id="newlist" class="form-control" type="text" name="newlist" ng-model="newlist" placeholder="What are you up to?" required/>
+					<select class="form-control" ng-model="priority">
+				        <option value='normal'>Normal</option>
+				        <option value='medium'>Medium</option>
+				        <option value='high'>High</option>
+				    </select>
+				    <br/>
+					<button submit class="btn btn-success"></span>Add Task</button>
 				</form>
+				<br/>
+				<br/>
 				<ul class="list-group">
-					<li class="list-group-item" ng-repeat="todo in todos">
+					<li class="list-group-item" ng-repeat="todo in todos track by $index">
 						<input type="checkbox" ng-model="todo.done"/>
 						<span ng-class="{done: todo.done}">{{todo.title}}</span>
+						<span class="priority">{{todo.priority}}</span>
+						<span class="glyphicon glyphicon-remove" ng-click="delete($index)"></span>
 					</li>
 				</ul>
-				<button ng-click="clear()" class="btn btn-warning">Clear</button>
+				<button ng-show="hideClear" ng-click="clear()" class="btn btn-warning">Clear Completed</button>
 			</div>
 		</div>
-
 	</body>
 </html>
-
